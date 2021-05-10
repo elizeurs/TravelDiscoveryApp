@@ -8,20 +8,52 @@
 import SwiftUI
 
 struct ContentView: View {
+  
+  init() {
+    UINavigationBar.appearance().largeTitleTextAttributes = [
+      .foregroundColor: UIColor.white
+    ]
+  }
+  
   var body: some View {
     NavigationView {
       
-      ScrollView {
+      ZStack {
         
-        DiscoveryCategoriesView()
+        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)), Color(#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1))]), startPoint: .top, endPoint: .bottom)
+          .ignoresSafeArea()
         
-        PopularDestinationsView()
+        Color(.init(white: 0.95, alpha: 1))
+          .offset(y: 400)
         
-        PopularRestaurantsView()
-        
-        TrendingCreatorsView()
-        
-      }.navigationTitle("Discovery")
+        ScrollView {
+          
+          HStack {
+            Image(systemName: "magnifyingglass")
+            Text("Where do you want to go?")
+            Spacer()
+          }.font(.system(size: 14, weight: .semibold))
+          .foregroundColor(.white)
+          .padding()
+          .background(Color(.init(white: 1, alpha: 0.3)))
+          .cornerRadius(10)
+          .padding(16)
+          
+          DiscoveryCategoriesView()
+          
+          VStack {
+            PopularDestinationsView()
+            
+            PopularRestaurantsView()
+            
+            TrendingCreatorsView()
+            
+          }.background(Color(.init(white: 0.95, alpha: 1)))
+          .cornerRadius(16)
+          .padding(.top, 32)
+        }
+      }
+      .navigationTitle("Discovery")
     }
   }
 }
@@ -36,7 +68,7 @@ struct PopularDestinationsView: View {
     .init(name: "Paris", country: "France", imageName: "eiffel_tower"),
     .init(name: "Tokyo", country: "Japan", imageName: "japan"),
     .init(name: "New York", country: "US", imageName: "new_york")
-
+    
     
   ]
   
@@ -60,7 +92,7 @@ struct PopularDestinationsView: View {
                 .resizable()
                 .scaledToFill()
                 .frame(width: 125, height: 125)
-//                .clipped()
+                //                .clipped()
                 .cornerRadius(4)
                 .padding(.horizontal, 6)
                 .padding(.vertical, 6)
@@ -74,11 +106,10 @@ struct PopularDestinationsView: View {
                 .padding(.bottom, 8)
                 .foregroundColor(.gray)
             }
-              .frame(width: 125)
-              .background(Color(.init(white: 0.9, alpha: 1)))
-              .cornerRadius(5)
-              .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
-              .padding(.bottom)
+            .background(Color.white)
+            .cornerRadius(5)
+            .shadow(color: .init(.sRGB, white: 0.8, opacity: 1), radius: 4, x: 0.0, y: 2)
+            .padding(.bottom)
           }
         }.padding(.horizontal)
       }
@@ -143,11 +174,11 @@ struct PopularRestaurantsView: View {
               
               Spacer()
             }
-                .frame(width: 240)
-                .background(Color(.init(white: 0.9, alpha: 1)))
-                .cornerRadius(5)
-                .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
-                .padding(.bottom)
+            .frame(width: 240)
+            .background(Color.white)
+            .cornerRadius(5)
+            .shadow(color: .init(.sRGB, white: 0.8, opacity: 1), radius: 4, x: 0.0, y: 2)
+            .padding(.bottom)
           }
         }.padding(.horizontal)
       }
@@ -228,14 +259,14 @@ struct DiscoveryCategoriesView: View {
       HStack(alignment: .top, spacing: 14) {
         ForEach(categories, id: \.self) { category in
           VStack(spacing: 8) {
-//            Spacer()
+            //            Spacer()
             Image(systemName: category.imageName)
-              .font(.system(size: 20))
-              .foregroundColor(.white)
+              .font(.system(size: 25))
+              .foregroundColor(Color(#colorLiteral(red: 0.9989508986, green: 0.4407047629, blue: 0, alpha: 1)))
               .frame(width: 68, height: 68)
-              .background(Color.gray)
+              .background(Color.white)
               .cornerRadius(34)
-              .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
+            //              .shadow(color: .gray, radius: 4, x: 0.0, y: 2)
             Text(category.name)
               .font(.system(size: 12, weight: .semibold))
               .multilineTextAlignment(.center)
