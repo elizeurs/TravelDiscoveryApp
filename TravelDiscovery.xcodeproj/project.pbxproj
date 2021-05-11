@@ -19,6 +19,7 @@
 		75FF6EB9264B011900DF4ECF /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF6EB8264B011900DF4ECF /* Restaurant.swift */; };
 		75FF6EBC264B013F00DF4ECF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF6EBB264B013F00DF4ECF /* User.swift */; };
 		75FF6EBF264B016000DF4ECF /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF6EBE264B016000DF4ECF /* Category.swift */; };
+		75FF6EC3264B29DB00DF4ECF /* TileModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75FF6EC2264B29DB00DF4ECF /* TileModifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		75FF6EB8264B011900DF4ECF /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
 		75FF6EBB264B013F00DF4ECF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		75FF6EBE264B016000DF4ECF /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		75FF6EC2264B29DB00DF4ECF /* TileModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileModifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		75562D5E2647447600851B9F /* TravelDiscovery */ = {
 			isa = PBXGroup;
 			children = (
+				75FF6EC1264B29BF00DF4ECF /* Utils */,
 				75FF6EB4264B00BA00DF4ECF /* Models */,
 				75FF6E9D264AED1300DF4ECF /* Discover */,
 				75562D5F2647447600851B9F /* TravelDiscoveryApp.swift */,
@@ -107,6 +110,14 @@
 				75FF6EBE264B016000DF4ECF /* Category.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		75FF6EC1264B29BF00DF4ECF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				75FF6EC2264B29DB00DF4ECF /* TileModifier.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				75FF6EAF264AFDAC00DF4ECF /* DiscoverCategoriesView.swift in Sources */,
+				75FF6EC3264B29DB00DF4ECF /* TileModifier.swift in Sources */,
 				75FF6EBF264B016000DF4ECF /* Category.swift in Sources */,
 				75562D622647447600851B9F /* DiscoverView.swift in Sources */,
 				75FF6EB2264AFF3100DF4ECF /* TrendingCreatorsView.swift in Sources */,
