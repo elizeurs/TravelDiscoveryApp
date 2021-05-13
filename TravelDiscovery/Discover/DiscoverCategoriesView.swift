@@ -45,20 +45,6 @@ struct DiscoverCategoriesView: View {
   }
 }
 
-class CategoryDetailsViewModel: ObservableObject {
-  
-  @Published var isLoading = true
-  @Published var places = [Int]()
-  
-  init() {
-    // network code will happen here
-    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-      self.isLoading = false
-      self.places = [1,2,3,4,5,6,7]
-    }
-  }
-}
-
 struct ActivityIndicatorView: UIViewRepresentable {
   func makeUIView(context: Context) -> UIActivityIndicatorView {
     let aiv = UIActivityIndicatorView(style: .large)
@@ -73,6 +59,47 @@ struct ActivityIndicatorView: UIViewRepresentable {
     
   }
 }
+
+struct Place: Decodable, Hashable {
+  let name, thumbnail: String
+}
+
+class CategoryDetailsViewModel: ObservableObject {
+  
+  @Published var isLoading = true
+  @Published var places = [Place]()
+  
+  @Published var errorMessage = ""
+  
+  init() {
+    // network code will happen here
+    
+    // real network code
+    
+    guard let url = URL(string: "https://travel.letsbuildthatapp.com/travel_discovery/category?name=art") else { return }
+    
+    URLSession.shared.dataTask(with: url) { (data, resp, err) in
+      
+      // you want to check resp statusCode and err
+      
+      DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        
+        guard let data = data else { return }
+        
+        do {
+          self.places = try JSONDecoder().decode([Place].self, from: data)
+        } catch  {
+          print("Failed to decode JSON:", error)
+          self.errorMessage =  error.localizedDescription
+        }
+        
+        self.isLoading = false
+//        self.places = [1]
+      }
+    }.resume() // make sure to have resume, otherwise, your code doesn't work.
+  }
+}
+
 
 struct CategoryDetailsView: View {
   
@@ -92,37 +119,41 @@ struct CategoryDetailsView: View {
         .cornerRadius(8)
         
       } else {
-        ScrollView {
-          ForEach(vm.places, id: \.self) { item in
+        ZStack {
+          Text(vm.errorMessage)
+          ScrollView {
+            ForEach(vm.places, id: \.self) { place in
               VStack(alignment: .leading, spacing: 0) {
-              Image("art1")
-                .resizable()
-                .scaledToFill()
-              
-              Text("Demo 123")
-                .font(.system(size: 12, weight: .semibold))
-                .padding()
-            }.asTile()
-            .padding()
+                Image("art1")
+                  .resizable()
+                  .scaledToFill()
+                
+                Text(place.name)
+                  .font(.system(size: 12, weight: .semibold))
+                  .padding()
+              }.asTile()
+              .padding()
+            }
           }
-        }.navigationBarTitle("Category", displayMode: .inline)
+        }
       }
     }
+    .navigationBarTitle("Category", displayMode: .inline)
   }
 }
 
 struct DiscoverCategoriesView_Previews: PreviewProvider {
-    static var previews: some View {
-      
-      NavigationView {
-        CategoryDetailsView()
-      }
-      
-      DiscoverView()
-      
-//      ZStack {
-//        Color(#colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1))
-//        DiscoverCategoriesView()
-//      }
+  static var previews: some View {
+    
+    NavigationView {
+      CategoryDetailsView()
     }
+    
+    DiscoverView()
+    
+    //      ZStack {
+    //        Color(#colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1))
+    //        DiscoverCategoriesView()
+    //      }
+  }
 }
