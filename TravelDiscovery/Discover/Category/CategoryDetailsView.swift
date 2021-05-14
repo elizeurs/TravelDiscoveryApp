@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-
 import KingfisherSwiftUI
 import SDWebImageSwiftUI
 
@@ -31,23 +30,23 @@ class CategoryDetailsViewModel: ObservableObject {
     
     URLSession.shared.dataTask(with: url) { (data, resp, err) in
       
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+      
       // you want to check resp statusCode and err
       if let statusCode = (resp as? HTTPURLResponse)?.statusCode, statusCode >= 400 {
         self.isLoading = false
         self.errorMessage = "Bad status: \(statusCode)"
         return
       }
-      
-      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-        
         guard let data = data else { return }
         
         do {
           self.places = try JSONDecoder().decode([Place].self, from: data)
         } catch  {
           print("Failed to decode JSON:", error)
-          self.errorMessage =  error.localizedDescription
+          self.errorMessage = error.localizedDescription
         }
+        
         self.isLoading = false
 //        self.places = [1]
       }
@@ -90,6 +89,7 @@ struct CategoryDetailsView: View {
                 .font(.system(size: 64, weight: .semibold))
                 .foregroundColor(.red)
               Text(vm.errorMessage)
+                .padding()
             }
           }
           
