@@ -36,7 +36,7 @@ struct PopularDestinationsView: View {
               destination: PopularDestinationDetailsView(destination: destination),
               label: {
                 PopularDestinationTile(destination: destination)
-                .padding(.bottom)
+                  .padding(.bottom)
               })
           }
         }.padding(.horizontal)
@@ -50,7 +50,7 @@ struct PopularDestinationDetailsView: View {
   let destination: Destination
   
   @State var region: MKCoordinateRegion
-  @State var isShowingAttractions = false
+  @State var isShowingAttractions = true
   
   init(destination: Destination) {
     self.destination = destination
@@ -80,10 +80,10 @@ struct PopularDestinationDetailsView: View {
         Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")
           .padding(.top, 4)
           .font(.system(size: 14))
-
+        
         
         HStack{ Spacer() }
-          
+        
       }
       .padding(.horizontal)
       
@@ -103,11 +103,15 @@ struct PopularDestinationDetailsView: View {
         
       }.padding(.horizontal)
       
-//      Map(coordinateRegion: $region)
-//        .frame(height: 300)
+      //      Map(coordinateRegion: $region)
+      //        .frame(height: 300)
       
       Map(coordinateRegion: $region, annotationItems: isShowingAttractions ?  attractions : []) { attraction in
-        MapMarker(coordinate: .init(latitude: attraction.latitude, longitude: attraction.longitude), tint: .red)
+        //        MapMarker(coordinate: .init(latitude: attraction.latitude, longitude: attraction.longitude), tint: .red)
+        
+        MapAnnotation(coordinate: .init(latitude: attraction.latitude, longitude: attraction.longitude)) {
+          CustomMapAnnotation(attraction: attraction)
+        }
       }
       .frame(height: 300)
       
@@ -115,16 +119,36 @@ struct PopularDestinationDetailsView: View {
   }
   
   let attractions: [Attraction] = [
-    .init(name: "Eiffel_Tower", latitude: 48.858605, longitude: 2.2946),
-    .init(name: "Champs-Elysees", latitude: 48.866867, longitude: 2.311780),
-    .init(name: "Louvre Museum", latitude: 48.860288, longitude: 2.337789)
+    .init(name: "Eiffel_Tower", imageName: "eiffel_tower", latitude: 48.858605, longitude: 2.2946),
+    .init(name: "Champs-Elysees", imageName: "new_york", latitude: 48.866867, longitude: 2.311780),
+    .init(name: "Louvre Museum", imageName: "art2", latitude: 48.860288, longitude: 2.337789)
   ]
+}
+
+struct CustomMapAnnotation: View {
+  
+  let  attraction: Attraction
+  var body: some View {
+    VStack {
+      Image(attraction.imageName)
+        .resizable()
+        .frame(width: 80, height: 60)
+        .cornerRadius(4)
+      
+      Text(attraction.name)
+        .font(.system(size: 12, weight: .semibold))
+        .padding(.horizontal, 6)
+        .padding(.vertical, 4)
+        .background(LinearGradient(gradient: /*@START_MENU_TOKEN@*/Gradient(colors: [Color.red, Color.blue])/*@END_MENU_TOKEN@*/, startPoint: /*@START_MENU_TOKEN@*/.leading/*@END_MENU_TOKEN@*/, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
+        .foregroundColor(.white)
+    }.shadow(radius: 5)
+  }
 }
 
 struct Attraction: Identifiable {
   let id = UUID().uuidString
   
-  let name: String
+  let name, imageName: String
   let latitude, longitude: Double
 }
 
@@ -156,16 +180,16 @@ struct PopularDestinationTile: View {
         .foregroundColor(.gray)
     }
     .asTile()
-//            .modifier(TileModifier())
+    //            .modifier(TileModifier())
   }
 }
 
 struct PopularDestinationsView_Previews: PreviewProvider {
-    static var previews: some View {
-      NavigationView {
-        PopularDestinationDetailsView(destination: .init(name: "Paris", country: "France", imageName: "eiffel_tower", latitude: 48.859565, longitude: 2.353235))
-      }
-      DiscoverView()
-      PopularDestinationsView()
+  static var previews: some View {
+    NavigationView {
+      PopularDestinationDetailsView(destination: .init(name: "Paris", country: "France", imageName: "eiffel_tower", latitude: 48.859565, longitude: 2.353235))
     }
+    DiscoverView()
+    PopularDestinationsView()
+  }
 }
