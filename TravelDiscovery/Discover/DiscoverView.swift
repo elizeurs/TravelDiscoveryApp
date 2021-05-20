@@ -24,7 +24,7 @@ struct DiscoverView: View {
       
       ZStack {
         
-        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)), Color(#colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1))]), startPoint: .top, endPoint: .bottom)
+        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 1, green: 0.5781051517, blue: 0, alpha: 1)), Color(#colorLiteral(red: 0.1622404456, green: 0.1631172001, blue: 0.1880594492, alpha: 1))]), startPoint: .top, endPoint: .bottom)
           .ignoresSafeArea()
         
 //        Color(.init(white: 0.95, alpha: 1))
