@@ -72,10 +72,12 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDataSo
       
     })
     
-    setViewControllers([allControllers.first!],
-                       direction: .forward,
-                       animated: true,
-                       completion: nil)
+    if let first = allControllers.first {
+      setViewControllers([first],
+                         direction: .forward,
+                         animated: true,
+                         completion: nil)
+    }
     
     self.dataSource = self
     self.delegate = self
