@@ -11,6 +11,19 @@ import KingfisherSwiftUI
 struct RestaurantDetails: Decodable {
   let description: String
   let popularDishes: [Dish]
+  let photos: [String]
+  let reviews: [Review]
+}
+
+struct Review: Decodable, Hashable {
+  let user: ReviewUser
+  let rating: Int
+  let text: String
+}
+
+struct ReviewUser: Decodable, Hashable {
+  let id: Int
+  let username, firstName, lastName, profileImage: String
 }
 
 struct Dish: Decodable, Hashable {
@@ -91,10 +104,14 @@ struct RestaurantDetailsView: View {
           }.foregroundColor(.orange)
         }
         
-        Text(vm.details?.description ?? "")
-          .padding(.top, 8)
-          .font(.system(size: 14, weight: .regular))
-      }.padding()
+      }.padding(.top)
+      .padding(.horizontal)
+      
+      Text(vm.details?.description ?? "")
+        .padding(.top, 8)
+        .font(.system(size: 14, weight: .regular))
+        .padding(.horizontal)
+        .padding(.bottom)
       
       HStack {
         Text("Popular Dishes")
@@ -109,8 +126,64 @@ struct RestaurantDetailsView: View {
           }
         }.padding(.horizontal)
       }
+      
+      if let reviews = vm.details?.reviews {
+        ReviewsList(reviews: reviews)
+      }
     }
     .navigationBarTitle("Restaurant Details", displayMode: .inline)
+  }
+}
+
+struct ReviewsList: View {
+  
+  let reviews: [Review]
+  
+  var body: some View {
+    HStack {
+      Text("Customer Reviews")
+        .font(.system(size: 16, weight: .bold))
+      Spacer()
+    }.padding(.horizontal)
+    
+//    if let reviews = vm.details?.reviews {
+      ForEach(reviews, id: \.self) { review in
+        VStack(alignment: .leading) {
+          HStack {
+            KFImage(URL(string: review.user.profileImage))
+              .resizable()
+              .scaledToFit()
+              .frame(width: 44)
+              .clipShape(Circle())
+            
+            VStack(alignment: .leading, spacing: 4) {
+              Text("\(review.user.firstName)\(review.user.lastName)")
+                .font(.system(size: 14, weight: .bold))
+              
+              HStack(spacing: 4) {
+                ForEach(0..<review.rating, id: \.self) { num in
+                  Image(systemName: "star.fill")
+                    .foregroundColor(.orange)
+                    .font(.system(size: 12))
+                }
+                
+                ForEach(0..<5 - review.rating, id: \.self) { num in
+                  Image(systemName: "star.fill")
+                    .foregroundColor(.gray)
+                }
+              }.font(.system(size: 12))
+            }
+            
+            Spacer()
+            Text("Dec 2020")
+              .font(.system(size: 14, weight: .light))
+          }
+          Text(review.text)
+          
+        }.padding(.top)
+        .padding(.horizontal)
+      }
+//    }
   }
 }
 
@@ -135,8 +208,8 @@ struct DishCell: View {
         Text(dish.price)
           .foregroundColor(.white)
           .font(.system(size: 13, weight: .bold))
-          .padding(.horizontal, 6)
-          .padding(.bottom, 4)
+          .padding(.horizontal, 20)
+          .padding(.bottom, 5)
       }
       .frame(width: 150, height: 120)
       .cornerRadius(5)
@@ -151,7 +224,7 @@ struct DishCell: View {
 }
 
 struct RestaurantDetailsView_Previews: PreviewProvider {
-    static var previews: some View {
-      RestaurantDetailsView(restaurant: .init(name: "Japan's Finest Tapas", imageName: "tapas"))
-    }
+  static var previews: some View {
+    RestaurantDetailsView(restaurant: .init(name: "Japan's Finest Tapas", imageName: "tapas"))
+  }
 }
