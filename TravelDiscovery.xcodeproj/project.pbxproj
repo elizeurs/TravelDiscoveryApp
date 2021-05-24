@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		75277198265C670D0011DEF2 /* RestaurantPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75277197265C670D0011DEF2 /* RestaurantPhotosView.swift */; };
 		75562D602647447600851B9F /* TravelDiscoveryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75562D5F2647447600851B9F /* TravelDiscoveryApp.swift */; };
 		75562D622647447600851B9F /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75562D612647447600851B9F /* DiscoverView.swift */; };
 		75562D642647447700851B9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75562D632647447700851B9F /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		75277197265C670D0011DEF2 /* RestaurantPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPhotosView.swift; sourceTree = "<group>"; };
 		75562D5C2647447600851B9F /* TravelDiscovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelDiscovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75562D5F2647447600851B9F /* TravelDiscoveryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDiscoveryApp.swift; sourceTree = "<group>"; };
 		75562D612647447600851B9F /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				75AAF3EB26584879007C3C8B /* RestaurantDetailsView.swift */,
+				75277197265C670D0011DEF2 /* RestaurantPhotosView.swift */,
 			);
 			path = Restaurant;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 				75562D602647447600851B9F /* TravelDiscoveryApp.swift in Sources */,
 				75FF6EAA264AFC3D00DF4ECF /* PopularDestinationsView.swift in Sources */,
 				75FF6EB6264B00D400DF4ECF /* Destination.swift in Sources */,
+				75277198265C670D0011DEF2 /* RestaurantPhotosView.swift in Sources */,
 				757FC192264D93990030FD64 /* ActivityIndicatorView.swift in Sources */,
 				757FC18E264D92460030FD64 /* CategoryDetailsView.swift in Sources */,
 			);

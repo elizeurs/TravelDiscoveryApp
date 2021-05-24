@@ -86,9 +86,14 @@ struct RestaurantDetailsView: View {
           }
           Spacer()
           
-          Text("See more photos")
-            .foregroundColor(.white)
-            .font(.system(size: 14, weight: .regular))
+          NavigationLink(
+            destination: Text("Destination"),
+            label: {
+              Text("See more photos")
+                .foregroundColor(.white)
+                .font(.system(size: 14, weight: .regular))
+            })
+          
         }.padding()
       }
       
