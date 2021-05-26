@@ -31,6 +31,8 @@ struct RestaurantPhotosView: View {
   ]
   
   @State var mode = "grid"
+  @State var shouldShowFullScreenModal = false
+  @State var selectedPhotoIndex = 0
   
   init() {
     // this changes every UISegmentedControl in your application
@@ -40,8 +42,6 @@ struct RestaurantPhotosView: View {
     UISegmentedControl.appearance().setTitleTextAttributes(titleTextAttributes, for: .selected)
     UISegmentedControl.appearance().setTitleTextAttributes(titleTextAttributes, for: .normal)
   }
-  
-  @State var shouldShowFullScreenModal = false
   
   var body: some View {
     GeometryReader { proxy in
@@ -61,7 +61,7 @@ struct RestaurantPhotosView: View {
               Color.black
                 .ignoresSafeArea()
               
-              RestaurantCarouselContainer(imageUrlStrings: photoUrlStrings)
+              RestaurantCarouselContainer(imageUrlStrings: photoUrlStrings, selectedIndex: selectedPhotoIndex)
               
               Button(action: {
                 shouldShowFullScreenModal.toggle()
@@ -73,6 +73,7 @@ struct RestaurantPhotosView: View {
               })
             }
           })
+          .opacity(shouldShowFullScreenModal ? 1 : 0)
         
         if mode == "grid" {
           LazyVGrid(columns: [
@@ -82,6 +83,7 @@ struct RestaurantPhotosView: View {
             ForEach(photoUrlStrings, id: \.self) { urlString in
               
               Button(action: {
+                self.selectedPhotoIndex = photoUrlStrings.firstIndex(of: urlString) ?? 0
                 shouldShowFullScreenModal.toggle()
               }, label: {
                 KFImage(URL(string: urlString))
