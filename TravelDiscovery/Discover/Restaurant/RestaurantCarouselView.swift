@@ -1,20 +1,20 @@
 //
-//  DestinationHeaderContainer.swift
+//  RestaurantCarouselView.swift
 //  TravelDiscovery
 //
-//  Created by Elizeu RS on 16/05/21.
+//  Created by Elizeu RS on 26/05/21.
 //
 
 import SwiftUI
 import KingfisherSwiftUI
 
-struct DestinationHeaderContainer: UIViewControllerRepresentable {
+struct RestaurantCarouselContainer: UIViewControllerRepresentable {
   
   let imageUrlStrings: [String]
   
   func makeUIViewController(context: Context) -> UIViewController {
     
-    let pvc = CustomPageViewController(imageUrlStrings: imageUrlStrings)
+    let pvc = CarouselPageViewController(imageUrlStrings: imageUrlStrings)
     return pvc
   }
   
@@ -25,7 +25,7 @@ struct DestinationHeaderContainer: UIViewControllerRepresentable {
   }
 }
 
-class CustomPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class CarouselPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
   
   func presentationCount(for pageViewController: UIPageViewController) -> Int {
     allControllers.count
@@ -65,9 +65,12 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDataSo
     // pages that we swipe through
     allControllers = imageUrlStrings.map({ imageName in
       let hostingController = UIHostingController(rootView:
+                                                    ZStack {
+                                                      Color.black
                                                       KFImage(URL(string: imageName))
                                                       .resizable()
-                                                      .scaledToFill()
+                                                      .scaledToFit()
+                                                    }
                                                     )
                                                   hostingController.view.clipsToBounds = true
       return hostingController
@@ -90,17 +93,9 @@ class CustomPageViewController: UIPageViewController, UIPageViewControllerDataSo
   }
 }
 
-struct DestinationHeaderContainer_Previews: PreviewProvider {
-  
-  static let imageUrlStrings = [  "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/b1642068-5624-41cf-83f1-3f6dff8c1702",  "https://letsbuildthatapp-videos.s3.us-west-2.amazonaws.com/7156c3c6-945e-4284-a796-915afdc158b5",   "https://letsbuildthatapp-videos.s3-us-west-2.amazonaws.com/2240d474-2237-4cd3-9919-562cd1bb439e"
-  ]
-  
-  static var previews: some View {
-    DestinationHeaderContainer(imageUrlStrings: imageUrlStrings)
-      .frame(height: 300)
-    NavigationView {
-      PopularDestinationDetailsView(destination: .init(name: "Paris", country: "France", imageName: "eiffel_tower", latitude: 48.859565, longitude: 2.353235))
-    }
-  }
-}
 
+//struct RestaurantCarouselView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        RestaurantCarouselView()
+//    }
+//}

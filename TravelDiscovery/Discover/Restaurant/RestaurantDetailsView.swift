@@ -87,7 +87,7 @@ struct RestaurantDetailsView: View {
           Spacer()
           
           NavigationLink(
-            destination: Text("Destination"),
+            destination: RestaurantPhotosView(),
             label: {
               Text("See more photos")
                 .foregroundColor(.white)
