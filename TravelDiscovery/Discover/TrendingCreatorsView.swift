@@ -29,30 +29,46 @@ struct TrendingCreatorsView: View {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(alignment: .top, spacing: 12) {
           ForEach(users, id: \.self) { user in
-            VStack {
-              Image(user.imageName)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 60, height: 60)
-                .background(Color(.init(white: 0.9, alpha: 1)))
-                .cornerRadius(30)
-              
-              Text(user.name)
-                .font(.system(size: 11, weight: .semibold))
-                .multilineTextAlignment(.center)
-            }
-            .frame(width: 60)
-            .shadow(color: .gray, radius: 4, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: 2)
-            .padding(.bottom)
+            NavigationLink(
+              destination: UserDetailsView(user: user),
+              label: {
+                DiscoverUserView(user: user)
+              })
           }
         }.padding(.horizontal)
+        .padding(.bottom)
       }
     }
   }
 }
 
+
+struct DiscoverUserView: View {
+  
+  let user: User
+  
+  var body: some View {
+    VStack {
+      Image(user.imageName)
+        .resizable()
+        .scaledToFill()
+        .frame(width: 60, height: 60)
+        .background(Color(.init(white: 0.9, alpha: 1)))
+        .cornerRadius(30)
+      
+      Text(user.name)
+        .font(.system(size: 11, weight: .semibold))
+        .multilineTextAlignment(.center)
+        .foregroundColor(Color(.label)) // .label works for dark/light mode
+    }
+    .frame(width: 60)
+    .shadow(color: .gray, radius: 4, x: /*@START_MENU_TOKEN@*/0.0/*@END_MENU_TOKEN@*/, y: 2)
+  }
+}
+
 struct TrendingCreatorsView_Previews: PreviewProvider {
     static var previews: some View {
-        TrendingCreatorsView()
+//        TrendingCreatorsView()
+      DiscoverView()
     }
 }

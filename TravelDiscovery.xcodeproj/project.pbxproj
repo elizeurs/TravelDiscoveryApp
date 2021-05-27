@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		751F8B5E266004D300925DFF /* UserDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751F8B5D266004D300925DFF /* UserDetailsView.swift */; };
 		75277198265C670D0011DEF2 /* RestaurantPhotosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75277197265C670D0011DEF2 /* RestaurantPhotosView.swift */; };
 		75562D602647447600851B9F /* TravelDiscoveryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75562D5F2647447600851B9F /* TravelDiscoveryApp.swift */; };
 		75562D622647447600851B9F /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75562D612647447600851B9F /* DiscoverView.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		751F8B5D266004D300925DFF /* UserDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsView.swift; sourceTree = "<group>"; };
 		75277197265C670D0011DEF2 /* RestaurantPhotosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPhotosView.swift; sourceTree = "<group>"; };
 		75562D5C2647447600851B9F /* TravelDiscovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelDiscovery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75562D5F2647447600851B9F /* TravelDiscoveryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDiscoveryApp.swift; sourceTree = "<group>"; };
@@ -69,6 +71,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		751F8B5C266004BF00925DFF /* User */ = {
+			isa = PBXGroup;
+			children = (
+				751F8B5D266004D300925DFF /* UserDetailsView.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		75562D532647447600851B9F = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +146,7 @@
 		75FF6E9D264AED1300DF4ECF /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				751F8B5C266004BF00925DFF /* User */,
 				75AAF3EA2658485D007C3C8B /* Restaurant */,
 				75CF58DE2651A86C00616DA3 /* Destination */,
 				757FC18C264D92230030FD64 /* Category */,
@@ -253,6 +264,7 @@
 				75FF6EBF264B016000DF4ECF /* Category.swift in Sources */,
 				75562D622647447600851B9F /* DiscoverView.swift in Sources */,
 				75FF6EB2264AFF3100DF4ECF /* TrendingCreatorsView.swift in Sources */,
+				751F8B5E266004D300925DFF /* UserDetailsView.swift in Sources */,
 				75CF58E02651A89C00616DA3 /* DestinationHeaderContainer.swift in Sources */,
 				757FC199264D94020030FD64 /* Place.swift in Sources */,
 				75FF6EA6264AFB4600DF4ECF /* PopularRestaurantsView.swift in Sources */,
